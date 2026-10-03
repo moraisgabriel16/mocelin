@@ -16,12 +16,12 @@
                         brand: {
                             gold: '#D4AF37',
                             goldLight: '#F3E5AB',
-                            goldDark: '#AA7C11',
+                            goldDark: '#996515',
                             ember: '#FF4500',
                             emberDark: '#8B0000',
-                            charcoal: '#121212',
-                            cardBg: '#1A1816',
-                            leather: '#2A1B12'
+                            charcoal: '#0F0F0F',
+                            cardBg: '#181615',
+                            leather: '#241710'
                         }
                     },
                     fontFamily: {
@@ -33,18 +33,14 @@
         }
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Canvas Confetti JS -->
+    <!-- Canvas Confetti & QRCode JS -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <!-- QRCode JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
@@ -59,35 +55,19 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Text Gradients */
         .text-gradient-gold {
-            background: linear-gradient(135deg, #FFF3B0 0%, #D4AF37 50%, #996515 100%);
+            background: linear-gradient(135deg, #FFF3B0 0%, #D4AF37 50%, #AA7C11 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .text-gradient-ember {
-            background: linear-gradient(135deg, #FF7F50 0%, #FF4500 50%, #B22222 100%);
+            background: linear-gradient(135deg, #FF7F50 0%, #FF4500 50%, #8B0000 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #121212;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2A2A2A;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
-        }
-
-        /* Card Flip Effect */
+        /* 3D Card Flip styling */
         .perspective-1000 {
             perspective: 1000px;
         }
@@ -103,726 +83,710 @@
             transform: rotateY(180deg);
         }
 
-        /* Ember / Glow Animations */
+        /* Glow & Stamp Animations */
         @keyframes emberPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(255, 69, 0, 0.2); }
-            50% { box-shadow: 0 0 25px rgba(255, 69, 0, 0.8), inset 0 0 15px rgba(255, 69, 0, 0.5); }
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.3), inset 0 0 10px rgba(255, 69, 0, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(255, 69, 0, 0.7), inset 0 0 20px rgba(255, 69, 0, 0.4); }
         }
         .ember-glow {
             animation: emberPulse 3s infinite ease-in-out;
         }
 
         @keyframes goldGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.6); }
+            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.25); }
+            50% { box-shadow: 0 0 28px rgba(212, 175, 55, 0.55); }
         }
         .gold-glow {
             animation: goldGlow 3.5s infinite ease-in-out;
         }
 
-        /* Stamp animation */
         @keyframes stampPop {
-            0% { transform: scale(3) rotate(-15deg); opacity: 0; }
+            0% { transform: scale(3) rotate(-20deg); opacity: 0; }
             50% { transform: scale(0.9) rotate(-5deg); opacity: 1; }
             75% { transform: scale(1.05) rotate(-2deg); }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
         .animate-stamp {
-            animation: stampPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: stampPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* Texture overlay */
+        /* Custom Texture Background */
         .bg-wood-pattern {
-            background-color: #120e0c;
+            background-color: #0c0a09;
             background-image: radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 0);
-            background-size: 24px 24px;
+            background-size: 28px 28px;
         }
     </style>
 </head>
 <body class="bg-wood-pattern min-h-screen flex flex-col justify-between selection:bg-brand-gold selection:text-black">
 
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-brand-gold/20 px-4 lg:px-8 py-3">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <!-- Brand Logo -->
+    <!-- Top Header Navigation -->
+    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-lg border-b border-brand-gold/20 px-4 lg:px-8 py-3.5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+            
+            <!-- Brand Logo & Address -->
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-gold via-brand-goldDark to-brand-ember flex items-center justify-center shadow-lg shadow-brand-ember/20 border border-brand-gold/40">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-gold via-brand-goldDark to-brand-ember flex items-center justify-center shadow-lg shadow-brand-ember/20 border border-brand-gold/50 shrink-0">
                     <i class="fa-solid fa-drumstick-bite text-black text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="font-serif-title text-lg lg:text-xl font-bold tracking-wider text-gradient-gold uppercase leading-none">Mocellin</h1>
-                    <span class="text-[10px] tracking-widest text-zinc-400 uppercase">Steakhouse • Uberaba</span>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-serif-title text-lg lg:text-xl font-extrabold tracking-wider text-gradient-gold uppercase leading-none">Mocellin</h1>
+                        <span class="text-[10px] bg-brand-ember/20 text-brand-ember border border-brand-ember/40 px-2 py-0.5 rounded-full font-bold">Uberaba</span>
+                    </div>
+                    <p class="text-[11px] text-zinc-400 font-medium">Av. Cel. Joaquim de Oliveira Prata, Uberaba - MG</p>
                 </div>
             </div>
 
-            <!-- Status Badge & Quick Actions -->
-            <div class="flex items-center gap-3">
-                <div class="hidden sm:flex items-center gap-2 bg-zinc-900 border border-brand-gold/30 px-3 py-1.5 rounded-full text-xs">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="text-zinc-300">Quinta do Assador: <strong class="text-brand-gold">Selos em Dobro!</strong></span>
-                </div>
-                
-                <button onclick="switchTab('card')" class="relative p-2 bg-zinc-900 hover:bg-zinc-800 text-brand-gold rounded-xl border border-brand-gold/30 transition-all">
-                    <i class="fa-solid fa-wallet text-lg"></i>
-                    <span id="navStampBadge" class="absolute -top-1 -right-1 bg-brand-ember text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            <!-- VIEW SWITCHER TOGGLE (PROPRIETÁRIO VS CLIENTE) -->
+            <div class="bg-zinc-950 p-1 rounded-2xl border border-brand-gold/30 flex items-center w-full md:w-auto shadow-inner">
+                <button onclick="switchMainView('owner')" id="viewBtnOwner" class="flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black shadow-lg">
+                    <i class="fa-solid fa-chart-line text-sm"></i> VISÃO DO PROPRIETÁRIO (Pitch & ROI)
+                </button>
+                <button onclick="switchMainView('client')" id="viewBtnClient" class="flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-mobile-screen text-sm"></i> VISÃO DO CLIENTE (App Fidelidade)
                 </button>
             </div>
+
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto px-4 lg:px-8 py-6 flex-grow w-full">
-        
-        <!-- Navigation Tabs -->
-        <nav class="flex overflow-x-auto no-scrollbar justify-start sm:justify-center gap-2 mb-8 pb-2 border-b border-zinc-800/80">
-            <button onclick="switchTab('card')" id="tab-card" class="tab-btn active px-5 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 whitespace-nowrap transition-all bg-gradient-to-r from-brand-gold to-brand-goldDark text-black shadow-md font-semibold">
-                <i class="fa-solid fa-id-card"></i> Cartão Fidelidade
-            </button>
-            <button onclick="switchTab('calc')" id="tab-calc" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 whitespace-nowrap transition-all text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
-                <i class="fa-solid fa-calculator"></i> Calculadora Picanha
-            </button>
-            <button onclick="switchTab('rewards')" id="tab-rewards" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 whitespace-nowrap transition-all text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
-                <i class="fa-solid fa-gift"></i> Prêmios & Menu
-            </button>
-            <button onclick="switchTab('vip')" id="tab-vip" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 whitespace-nowrap transition-all text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
-                <i class="fa-solid fa-crown"></i> Níveis VIP
-            </button>
-            <button onclick="switchTab('info')" id="tab-info" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm flex items-center gap-2 whitespace-nowrap transition-all text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
-                <i class="fa-solid fa-location-dot"></i> Reservas & Local
-            </button>
-        </nav>
 
-        <!-- TAB 1: CARTÃO FIDELIDADE (Virtual Card & Stamps) -->
-        <section id="content-card" class="tab-content block transition-all duration-300">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                
-                <!-- Left Column: Interactive 3D Card & Controls -->
-                <div class="lg:col-span-7 flex flex-col items-center">
-                    
-                    <!-- Card Flip Instruction -->
-                    <div class="text-xs text-zinc-400 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-rotate text-brand-gold animate-spin" style="animation-duration: 8s;"></i>
-                        <span>Clique no cartão para alternar Frente/Verso</span>
+        <!-- ========================================================================= -->
+        <!-- VIEW 1: PROPRIETÁRIO (PITCH DE NEGÓCIOS & SIMULADOR FINANCEIRO DE ROI) -->
+        <!-- ========================================================================= -->
+        <section id="mainViewOwner" class="block space-y-10 transition-all duration-300">
+            
+            <!-- Hero Pitch Executive Banner -->
+            <div class="relative bg-gradient-to-br from-zinc-900 via-zinc-950 to-brand-leather border border-brand-gold/40 rounded-3xl p-6 lg:p-10 shadow-2xl overflow-hidden gold-glow">
+                <div class="absolute -right-16 -top-16 w-80 h-80 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute right-10 bottom-0 opacity-10 hidden lg:block pointer-events-none">
+                    <i class="fa-solid fa-crown text-[280px] text-brand-gold"></i>
+                </div>
+
+                <div class="relative z-10 max-w-3xl">
+                    <div class="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/30 px-3.5 py-1.5 rounded-full text-xs text-brand-gold font-semibold mb-4">
+                        <i class="fa-solid fa-briefcase"></i> Proposta Estratégica de Fidelização para a Picanha do Mocellin
                     </div>
+                    <h2 class="font-serif-title text-3xl lg:text-5xl font-black text-white leading-tight">
+                        Transforme clientes casuais em <span class="text-gradient-gold">fregueses fiéis</span> em Uberaba.
+                    </h2>
+                    <p class="text-xs lg:text-base text-zinc-300 mt-4 leading-relaxed">
+                        Conquistar um cliente novo custa até <strong class="text-brand-gold">5x mais</strong> do que reter um atual. O <strong>Clube Picanha Prime</strong> foi desenhado especificamente para fazer o seu cliente voltar de <strong>2 a 3 vezes no mesmo mês</strong>, aumentando a ocupação das mesas e a lucratividade do seu restaurante na Av. Cel. Joaquim de Oliveira Prata.
+                    </p>
 
-                    <!-- 3D Card Container -->
-                    <div class="w-full max-w-md aspect-[1.58/1] perspective-1000 cursor-pointer my-2" onclick="flipCard()">
-                        <div id="fidelityCard" class="w-full h-full relative transform-style-3d shadow-2xl rounded-2xl border border-brand-gold/40">
-                            
-                            <!-- CARD FRONT -->
-                            <div class="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-black p-6 flex flex-col justify-between backface-hidden border border-brand-gold/30 gold-glow overflow-hidden">
-                                <!-- Background Texture Accent -->
-                                <div class="absolute -right-12 -top-12 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
-                                <div class="absolute -left-12 -bottom-12 w-48 h-48 bg-brand-ember/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <!-- Core Pitch Highlights -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
+                        <div class="bg-black/60 backdrop-blur p-3.5 rounded-2xl border border-zinc-800">
+                            <div class="text-[10px] text-zinc-400 uppercase font-bold">Aumento Frequência</div>
+                            <div class="text-lg lg:text-xl font-extrabold text-emerald-400 mt-0.5">+150%</div>
+                        </div>
+                        <div class="bg-black/60 backdrop-blur p-3.5 rounded-2xl border border-zinc-800">
+                            <div class="text-[10px] text-zinc-400 uppercase font-bold">Ticket Médio</div>
+                            <div class="text-lg lg:text-xl font-extrabold text-brand-gold mt-0.5">+20% a +35%</div>
+                        </div>
+                        <div class="bg-black/60 backdrop-blur p-3.5 rounded-2xl border border-zinc-800">
+                            <div class="text-[10px] text-zinc-400 uppercase font-bold">CMV Controlado</div>
+                            <div class="text-lg lg:text-xl font-extrabold text-zinc-200 mt-0.5">Sem Descontos</div>
+                        </div>
+                        <div class="bg-black/60 backdrop-blur p-3.5 rounded-2xl border border-zinc-800">
+                            <div class="text-[10px] text-zinc-400 uppercase font-bold">Base Própria</div>
+                            <div class="text-lg lg:text-xl font-extrabold text-brand-ember mt-0.5">CRM WhatsApp</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                <!-- Top Front Header -->
-                                <div class="flex justify-between items-start z-10">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-fire text-brand-ember text-xl"></i>
-                                        <span class="font-serif-title font-bold text-lg tracking-wider text-gradient-gold">MOCELLIN</span>
-                                    </div>
-                                    <span id="tierBadgeFront" class="px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase bg-gradient-to-r from-amber-700 to-yellow-600 text-black shadow-sm">
-                                        BRONZE VIP
-                                    </span>
-                                </div>
+            <!-- FINANCIAL ROI SIMULATOR SECTION FOR THE OWNER -->
+            <div class="bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 lg:p-8 shadow-2xl backdrop-blur">
+                <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-4 border-b border-zinc-800 pb-6 mb-8">
+                    <div>
+                        <span class="text-xs font-bold text-brand-gold uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-calculator"></i> Projeção de Faturamento
+                        </span>
+                        <h3 class="font-serif-title text-2xl lg:text-3xl font-bold text-white mt-1">Simulador Financeiro de Impacto de Lucro</h3>
+                    </div>
+                    <p class="text-xs text-zinc-400 lg:max-w-md">
+                        Ajuste os parâmetros do Mocellin abaixo e veja a estimativa de faturamento incremental anual gerado pelo programa.
+                    </p>
+                </div>
 
-                                <!-- Middle Card Info -->
-                                <div class="z-10 my-auto">
-                                    <div class="text-xs text-zinc-400 uppercase tracking-widest mb-1">Membro Titular</div>
-                                    <div id="memberNameDisplay" class="font-serif-title text-xl text-white font-semibold tracking-wide flex items-center gap-2">
-                                        <span>Gourmet Uberaba</span>
-                                        <i class="fa-solid fa-circle-check text-brand-gold text-xs"></i>
-                                    </div>
-                                    <div class="mt-4 flex justify-between items-end">
-                                        <div>
-                                            <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Acúmulo Atual</div>
-                                            <div class="text-sm text-zinc-200 font-medium">
-                                                <span id="stampsCountDisplay" class="text-brand-gold font-bold text-lg">0</span> / 10 Selos Picanha
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Cód. Fidelidade</div>
-                                            <div class="text-xs font-mono text-zinc-300">#MOC-8829</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Bottom Progress Bar -->
-                                <div class="z-10">
-                                    <div class="w-full bg-zinc-800/80 h-2 rounded-full overflow-hidden p-0.5 border border-zinc-700">
-                                        <div id="cardProgressBar" class="bg-gradient-to-r from-brand-gold via-yellow-400 to-brand-ember h-full rounded-full transition-all duration-500" style="width: 0%"></div>
-                                    </div>
-                                    <div class="flex justify-between text-[10px] text-zinc-400 mt-1.5">
-                                        <span>0 Selos</span>
-                                        <span class="text-brand-gold font-semibold">Meta: 1 Picanha Inteira Grátis!</span>
-                                    </div>
-                                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Sliders Box -->
+                    <div class="lg:col-span-6 space-y-6 bg-zinc-950/80 p-6 rounded-2xl border border-zinc-800">
+                        <!-- Slider 1: Active Clients -->
+                        <div>
+                            <div class="flex justify-between items-center text-xs font-bold mb-2">
+                                <span class="text-zinc-300">Base de Clientes Ativos Cadastrados</span>
+                                <span id="valRoiClients" class="text-brand-gold text-base font-extrabold">1,200 clientes</span>
                             </div>
-
-                            <!-- CARD BACK (Stamp Matrix) -->
-                            <div class="absolute inset-0 w-full h-full rounded-2xl bg-zinc-950 p-5 flex flex-col justify-between backface-hidden rotate-y-180 border border-brand-gold/40 shadow-inner overflow-hidden">
-                                <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
-                                    <span class="text-xs font-semibold text-brand-gold uppercase tracking-wider">Cartela de Selos Picanha Prime</span>
-                                    <span class="text-[10px] text-zinc-400">Complete 10 e Ganhe!</span>
-                                </div>
-
-                                <!-- Stamp Grid 2x5 -->
-                                <div id="stampGrid" class="grid grid-cols-5 gap-2 my-auto">
-                                    <!-- Slots dynamically rendered via JS -->
-                                </div>
-
-                                <div class="flex justify-between items-center pt-2 border-t border-zinc-800/80 text-[10px] text-zinc-400">
-                                    <span>Validade dos selos: 12 meses</span>
-                                    <span class="text-brand-gold">Mocellin Uberaba</span>
-                                </div>
+                            <input type="range" id="inputRoiClients" min="300" max="5000" step="100" value="1200" oninput="calculateOwnerRoi()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2.5 rounded-lg">
+                            <div class="flex justify-between text-[10px] text-zinc-500 mt-1">
+                                <span>300</span>
+                                <span>2.500</span>
+                                <span>5.000 clientes</span>
                             </div>
+                        </div>
 
+                        <!-- Slider 2: Average Ticket -->
+                        <div>
+                            <div class="flex justify-between items-center text-xs font-bold mb-2">
+                                <span class="text-zinc-300">Ticket Médio por Mesa/Pedido (R$)</span>
+                                <span id="valRoiTicket" class="text-brand-gold text-base font-extrabold">R$ 180</span>
+                            </div>
+                            <input type="range" id="inputRoiTicket" min="80" max="400" step="10" value="180" oninput="calculateOwnerRoi()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2.5 rounded-lg">
+                            <div class="flex justify-between text-[10px] text-zinc-500 mt-1">
+                                <span>R$ 80</span>
+                                <span>R$ 240</span>
+                                <span>R$ 400</span>
+                            </div>
+                        </div>
+
+                        <!-- Slider 3: Extra visits per year -->
+                        <div>
+                            <div class="flex justify-between items-center text-xs font-bold mb-2">
+                                <span class="text-zinc-300">Visitas Adicionais por Cliente / Ano</span>
+                                <span id="valRoiVisits" class="text-brand-gold text-base font-extrabold">+4 visitas</span>
+                            </div>
+                            <input type="range" id="inputRoiVisits" min="1" max="12" step="1" value="4" oninput="calculateOwnerRoi()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2.5 rounded-lg">
+                            <div class="flex justify-between text-[10px] text-zinc-500 mt-1">
+                                <span>+1 visita</span>
+                                <span>+6 visitas</span>
+                                <span>+12 visitas/ano</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Simulator Controls -->
-                    <div class="w-full max-w-md bg-zinc-900/90 border border-zinc-800 rounded-2xl p-5 mt-4 shadow-xl">
-                        <h3 class="text-sm font-semibold text-zinc-200 mb-3 flex items-center justify-between">
-                            <span><i class="fa-solid fa-wand-magic-sparkles text-brand-gold mr-2"></i>Simulador de Consumo</span>
-                            <span class="text-xs text-zinc-500 font-normal">Ação do Garçom / Validação</span>
-                        </h3>
-                        <p class="text-xs text-zinc-400 mb-4">
-                            Simule um pedido de Picanha no restaurante para registrar novos selos no seu cartão virtual.
-                        </p>
-                        
-                        <div class="flex gap-2">
-                            <button onclick="addStamp(1)" class="flex-1 py-3 px-4 bg-gradient-to-r from-brand-gold to-brand-goldDark hover:from-yellow-400 hover:to-brand-gold text-black font-bold text-sm rounded-xl transition-all shadow-lg shadow-brand-gold/10 flex items-center justify-center gap-2 active:scale-95">
-                                <i class="fa-solid fa-fire text-black"></i> +1 Selo Picanha
-                            </button>
-                            <button onclick="addStamp(2)" class="py-3 px-4 bg-zinc-800 hover:bg-zinc-700 border border-brand-gold/40 text-brand-gold font-semibold text-xs rounded-xl transition-all flex items-center gap-1 active:scale-95" title="Quinta em Dobro!">
-                                <i class="fa-solid fa-bolt"></i> +2 (Quinta)
-                            </button>
-                            <button onclick="resetStamps()" class="p-3 bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-red-400 rounded-xl transition-all" title="Reiniciar Cartela">
-                                <i class="fa-solid fa-rotate-left"></i>
-                            </button>
+                    <!-- ROI Results Display Panel -->
+                    <div class="lg:col-span-6 bg-gradient-to-br from-zinc-950 via-zinc-900 to-brand-leather p-6 lg:p-8 rounded-2xl border border-brand-gold/40 shadow-xl ember-glow flex flex-col justify-between h-full">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest font-bold text-zinc-400 mb-1">Resultado Projetado Anual</div>
+                            <h4 class="text-xs font-semibold text-zinc-300 mb-6">Faturamento Novo e Lucro Operacional Estimado</h4>
+
+                            <div class="space-y-4">
+                                <div class="bg-black/60 p-4 rounded-xl border border-brand-gold/30 flex justify-between items-center">
+                                    <div>
+                                        <div class="text-xs text-zinc-400">Receita Bruta Incremental</div>
+                                        <div id="resRoiGrossRevenue" class="text-2xl lg:text-3xl font-black text-gradient-gold">R$ 864.000</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[10px] bg-brand-gold/20 text-brand-gold border border-brand-gold/30 px-2.5 py-1 rounded-full font-bold">
+                                            + Vendas na Casa
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-black/60 p-4 rounded-xl border border-emerald-500/30 flex justify-between items-center">
+                                    <div>
+                                        <div class="text-xs text-zinc-400">Lucro Líquido Estimado (Considerando Margem de 35%)</div>
+                                        <div id="resRoiNetProfit" class="text-2xl lg:text-3xl font-black text-emerald-400">R$ 302.400</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full font-bold">
+                                            Lucro no Bolso
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-zinc-800 text-xs text-zinc-400 flex items-center justify-between">
+                            <span><i class="fa-solid fa-shield-check text-brand-gold mr-1"></i> Baseado em métricas médias do setor de Steakhouse</span>
+                            <button onclick="switchMainView('client')" class="text-brand-gold font-bold hover:underline">Testar App do Cliente &rarr;</button>
                         </div>
                     </div>
 
                 </div>
+            </div>
 
-                <!-- Right Column: Member Profile & Reward Banner -->
-                <div class="lg:col-span-5 space-y-6">
+            <!-- 5 STRATEGIC PILLARS FOR THE OWNER -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Pillar 1 -->
+                <div class="bg-zinc-900/90 border border-zinc-800 p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 text-brand-gold flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-shield-cat"></i>
+                    </div>
+                    <h4 class="font-serif-title font-bold text-lg text-white mb-2">Sem "Descontos Queima-Margem"</h4>
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        Descontos genéricos acostumam o cliente a pagar menos e destroem sua margem de lucro. Recompensamos com itens da própria casa (como sobremesa ou chopp) que possuem **alto valor percebido e baixíssimo CMV** (Custo de Mercadoria Vendida).
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-zinc-900/90 border border-zinc-800 p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-brand-ember/10 border border-brand-ember/30 text-brand-ember flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-calendar-day"></i>
+                    </div>
+                    <h4 class="font-serif-title font-bold text-lg text-white mb-2">Gatilho "Quinta da Picanha"</h4>
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        O mecanismo de **Selos em Dobro** nas quintas-feiras transfere a demanda dos dias superlotados de fim de semana para dias de movimento moderado, otimizando a equipe da cozinha e garçons sem custos extras.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-zinc-900/90 border border-zinc-800 p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h4 class="font-serif-title font-bold text-lg text-white mb-2">Canal Direto de WhatsApp</h4>
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        Ao se cadastrar para ganhar o primeiro selo na mesa, o cliente fornece telefone e data de aniversário. O Mocellin ganha um canal ativo para convidar para aniversários e novidades em Uberaba sem pagar anúncios no Instagram.
+                    </p>
+                </div>
+            </div>
+
+            <!-- COMPARISON TABLE: ANTES VS DEPOIS -->
+            <div class="bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 lg:p-8 shadow-xl">
+                <h3 class="font-serif-title text-2xl font-bold text-white mb-6 text-center lg:text-left">
+                    Comparativo Operacional: <span class="text-gradient-gold">Mocellin Antes vs. Depois do Clube</span>
+                </h3>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="border-b border-zinc-800 text-zinc-400">
+                                <th class="p-4 uppercase font-bold">Métrica / Cenário</th>
+                                <th class="p-4 uppercase font-bold text-red-400 bg-red-950/20 rounded-t-xl">Sem o Clube Fidelidade</th>
+                                <th class="p-4 uppercase font-bold text-emerald-400 bg-emerald-950/20 rounded-t-xl">Com o Clube Picanha Prime</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800/60 text-zinc-300">
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Frequência do Cliente VIP</td>
+                                <td class="p-4 text-zinc-400 bg-red-950/10">1x a cada 45 ou 60 dias</td>
+                                <td class="p-4 text-emerald-300 font-bold bg-emerald-950/10">1x a cada 15 dias (2x a 3x/mês)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Retenção e Fidelidade</td>
+                                <td class="p-4 text-zinc-400 bg-red-950/10">Troca fácil por qualquer outro restaurante</td>
+                                <td class="p-4 text-emerald-300 font-bold bg-emerald-950/10">Prefere o Mocellin para "fechar a cartela"</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Movimento de Meio de Semana</td>
+                                <td class="p-4 text-zinc-400 bg-red-950/10">Ocioso / Depende de promoções esporádicas</td>
+                                <td class="p-4 text-emerald-300 font-bold bg-emerald-950/10">Público ativado pela "Quinta em Dobro"</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Aniversariantes em Uberaba</td>
+                                <td class="p-4 text-zinc-400 bg-red-950/10">Decidem o local de última hora</td>
+                                <td class="p-4 text-emerald-300 font-bold bg-emerald-950/10">Mensagem automática no WhatsApp trazendo a família</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-white">Gasto da Picanha de Graça</td>
+                                <td class="p-4 text-zinc-400 bg-red-950/10">Não se aplica</td>
+                                <td class="p-4 text-emerald-300 font-bold bg-emerald-950/10">Pago com sobra após 10 consumo prévios</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 text-center bg-zinc-950 p-6 rounded-2xl border border-brand-gold/30">
+                    <h4 class="font-serif-title text-lg font-bold text-brand-gold mb-1">Pronto para ver a experiência prática do cliente na mesa?</h4>
+                    <p class="text-xs text-zinc-400 mb-4">Navegue no simulador do cliente para testar os acúmulos e cartela digital.</p>
+                    <button onclick="switchMainView('client')" class="px-6 py-3 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs rounded-xl shadow-lg hover:brightness-110 transition-all">
+                        Abrir Visão do Cliente Agora &rarr;
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- VIEW 2: EXPERIÊNCIA DO CLIENTE (APP FIDELIDADE VIRTUAL NA PRÁTICA) -->
+        <!-- ========================================================================= -->
+        <section id="mainViewClient" class="hidden space-y-8 transition-all duration-300">
+            
+            <!-- Sub-Navigation for Client Experience -->
+            <nav class="flex overflow-x-auto no-scrollbar justify-start sm:justify-center gap-2 pb-2 border-b border-zinc-800">
+                <button onclick="switchClientSubTab('card')" id="subtab-card" class="subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-gold text-black">
+                    <i class="fa-solid fa-id-card mr-1"></i> Cartão Fidelidade
+                </button>
+                <button onclick="switchClientSubTab('calc')" id="subtab-calc" class="subtab-btn px-4 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
+                    <i class="fa-solid fa-calculator mr-1"></i> Calculadora Picanha
+                </button>
+                <button onclick="switchClientSubTab('rewards')" id="subtab-rewards" class="subtab-btn px-4 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
+                    <i class="fa-solid fa-gift mr-1"></i> Prêmios
+                </button>
+                <button onclick="switchClientSubTab('vip')" id="subtab-vip" class="subtab-btn px-4 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
+                    <i class="fa-solid fa-crown mr-1"></i> Níveis VIP
+                </button>
+                <button onclick="switchClientSubTab('info')" id="subtab-info" class="subtab-btn px-4 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold hover:bg-zinc-900">
+                    <i class="fa-solid fa-location-dot mr-1"></i> Reservas Uberaba
+                </button>
+            </nav>
+
+            <!-- SUBTAB 1: CARTÃO FIDELIDADE DIGITAL 3D -->
+            <div id="subcontent-card" class="subcontent-block block">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                     
-                    <!-- Profile Card & Customization -->
-                    <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5 shadow-lg backdrop-blur">
-                        <div class="flex items-center gap-4 border-b border-zinc-800 pb-4 mb-4">
-                            <div class="relative">
-                                <img id="userAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250" alt="Avatar Cliente" class="w-14 h-14 rounded-full object-cover border-2 border-brand-gold">
-                                <span class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 rounded-full border-2 border-zinc-900" title="Ativo"></span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-center justify-between">
-                                    <h3 id="profileName" class="font-bold text-white text-base truncate">Gourmet Uberaba</h3>
-                                    <button onclick="openEditProfile()" class="text-xs text-brand-gold hover:underline">Editar</button>
+                    <!-- Left Column: Interactive Card -->
+                    <div class="lg:col-span-7 flex flex-col items-center">
+                        <div class="text-xs text-zinc-400 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-rotate text-brand-gold animate-spin" style="animation-duration: 8s;"></i>
+                            <span>Clique no cartão para virar (Frente / Verso)</span>
+                        </div>
+
+                        <!-- 3D Card Element -->
+                        <div class="w-full max-w-md aspect-[1.58/1] perspective-1000 cursor-pointer my-2" onclick="flipCard()">
+                            <div id="fidelityCard" class="w-full h-full relative transform-style-3d shadow-2xl rounded-2xl border border-brand-gold/40">
+                                
+                                <!-- FRONT CARD -->
+                                <div class="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-black p-6 flex flex-col justify-between backface-hidden border border-brand-gold/30 gold-glow overflow-hidden">
+                                    <div class="absolute -right-12 -top-12 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                                    <!-- Top Header -->
+                                    <div class="flex justify-between items-start z-10">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-solid fa-fire text-brand-ember text-xl"></i>
+                                            <span class="font-serif-title font-bold text-lg tracking-wider text-gradient-gold">MOCELLIN</span>
+                                        </div>
+                                        <span id="tierBadgeFront" class="px-3 py-1 rounded-full text-[10px] font-extrabold tracking-widest uppercase bg-gradient-to-r from-amber-700 to-yellow-600 text-black shadow">
+                                            BRONZE VIP
+                                        </span>
+                                    </div>
+
+                                    <!-- Middle Info -->
+                                    <div class="z-10 my-auto">
+                                        <div class="text-[10px] text-zinc-400 uppercase tracking-widest mb-0.5">Titular da Conta</div>
+                                        <div id="memberNameDisplay" class="font-serif-title text-xl text-white font-bold flex items-center gap-2">
+                                            <span>Gourmet Uberaba</span>
+                                            <i class="fa-solid fa-circle-check text-brand-gold text-xs"></i>
+                                        </div>
+                                        <div class="mt-3 flex justify-between items-end">
+                                            <div>
+                                                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Selos de Picanha</div>
+                                                <div class="text-sm text-zinc-200 font-medium">
+                                                    <span id="stampsCountDisplay" class="text-brand-gold font-bold text-xl">0</span> / 10 Selos
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Unidade Uberaba</div>
+                                                <div class="text-xs font-mono text-zinc-300">#MOC-9821</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bottom Progress -->
+                                    <div class="z-10">
+                                        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden p-0.5 border border-zinc-700">
+                                            <div id="cardProgressBar" class="bg-gradient-to-r from-brand-gold via-yellow-400 to-brand-ember h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                                        </div>
+                                        <div class="flex justify-between text-[10px] text-zinc-400 mt-1">
+                                            <span>0 Selos</span>
+                                            <span class="text-brand-gold font-semibold">Meta: Picanha Inteira Grátis!</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="text-xs text-zinc-400 mt-0.5">Cliente desde Out/2023</p>
-                                <div class="inline-flex items-center gap-1 mt-1 text-[11px] text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded border border-brand-gold/20">
-                                    <i class="fa-solid fa-star text-[9px]"></i> Membro Vip Mocellin
+
+                                <!-- BACK CARD (STAMP GRID) -->
+                                <div class="absolute inset-0 w-full h-full rounded-2xl bg-zinc-950 p-5 flex flex-col justify-between backface-hidden rotate-y-180 border border-brand-gold/40 shadow-inner overflow-hidden">
+                                    <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
+                                        <span class="text-xs font-bold text-brand-gold uppercase">Cartela Digital Mocellin</span>
+                                        <span class="text-[10px] text-zinc-400">Complete 10 e Ganhe!</span>
+                                    </div>
+
+                                    <div id="stampGrid" class="grid grid-cols-5 gap-2 my-auto">
+                                        <!-- Rendered by JS -->
+                                    </div>
+
+                                    <div class="flex justify-between items-center pt-2 border-t border-zinc-800 text-[10px] text-zinc-500">
+                                        <span>Av. Cel. Joaquim de Oliveira Prata</span>
+                                        <span class="text-brand-gold font-semibold">Uberaba - MG</span>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
 
-                        <!-- Quick Stats Grid -->
-                        <div class="grid grid-cols-3 gap-2 text-center">
-                            <div class="bg-zinc-950/60 p-2.5 rounded-xl border border-zinc-800/80">
-                                <div class="text-xs text-zinc-500">Picanhas</div>
-                                <div id="statTotalPicanhas" class="text-base font-bold text-white">4</div>
-                            </div>
-                            <div class="bg-zinc-950/60 p-2.5 rounded-xl border border-zinc-800/80">
-                                <div class="text-xs text-zinc-500">Prêmios</div>
-                                <div id="statRewardsClaimed" class="text-base font-bold text-brand-gold">1</div>
-                            </div>
-                            <div class="bg-zinc-950/60 p-2.5 rounded-xl border border-zinc-800/80">
-                                <div class="text-xs text-zinc-500">Economia</div>
-                                <div class="text-base font-bold text-emerald-400">R$ 180</div>
+                        <!-- Simulator Controls for Stamp Addition -->
+                        <div class="w-full max-w-md bg-zinc-900/90 border border-zinc-800 rounded-2xl p-5 mt-4 shadow-xl">
+                            <h3 class="text-xs font-bold text-zinc-200 mb-2 flex items-center justify-between uppercase tracking-wider">
+                                <span><i class="fa-solid fa-wand-magic-sparkles text-brand-gold mr-1.5"></i>Simulador de Validação na Mesa</span>
+                                <span class="text-[10px] text-zinc-500 font-normal">Ação do Garçom</span>
+                            </h3>
+                            <p class="text-xs text-zinc-400 mb-4">
+                                Clique abaixo para simular o acúmulo de selos após um almoço ou jantar no Mocellin.
+                            </p>
+                            
+                            <div class="flex gap-2">
+                                <button onclick="addStamp(1)" class="flex-1 py-3 px-4 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs rounded-xl shadow hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-fire"></i> +1 Selo Picanha
+                                </button>
+                                <button onclick="addStamp(2)" class="py-3 px-4 bg-brand-ember/20 border border-brand-ember/50 text-brand-ember font-bold text-xs rounded-xl hover:bg-brand-ember hover:text-white active:scale-95 transition-all flex items-center gap-1">
+                                    <i class="fa-solid fa-bolt"></i> +2 (Quinta em Dobro)
+                                </button>
+                                <button onclick="resetStamps()" class="p-3 bg-zinc-950 border border-zinc-800 text-zinc-400 hover:text-red-400 rounded-xl" title="Reiniciar Cartela">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- Reward Alert Box -->
-                    <div id="rewardAlertBox" class="bg-gradient-to-br from-zinc-900 via-brand-leather to-zinc-950 border border-brand-gold/40 rounded-2xl p-5 shadow-xl relative overflow-hidden">
-                        <div class="absolute -right-6 -bottom-6 text-brand-gold/10 text-8xl pointer-events-none">
-                            <i class="fa-solid fa-trophy"></i>
+                    <!-- Right Column: Member Profile & Reward Banner -->
+                    <div class="lg:col-span-5 space-y-6">
+                        
+                        <!-- Profile Card -->
+                        <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5 shadow-lg">
+                            <div class="flex items-center gap-4 border-b border-zinc-800 pb-4 mb-4">
+                                <img id="userAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250" alt="Cliente" class="w-14 h-14 rounded-full object-cover border-2 border-brand-gold">
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h3 id="profileName" class="font-bold text-white text-base truncate">Gourmet Uberaba</h3>
+                                        <button onclick="openEditProfile()" class="text-xs text-brand-gold hover:underline">Editar</button>
+                                    </div>
+                                    <p class="text-xs text-zinc-400 mt-0.5">Cliente Mocellin desde 2023</p>
+                                    <div class="inline-flex items-center gap-1 mt-1 text-[10px] text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded border border-brand-gold/20">
+                                        <i class="fa-solid fa-star text-[8px]"></i> Membro Vip Ativo
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2 text-center">
+                                <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800">
+                                    <div class="text-[10px] text-zinc-500 uppercase">Picanhas Pedidas</div>
+                                    <div id="statTotalPicanhas" class="text-base font-bold text-white">4</div>
+                                </div>
+                                <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800">
+                                    <div class="text-[10px] text-zinc-500 uppercase">Prêmios Resgatados</div>
+                                    <div id="statRewardsClaimed" class="text-base font-bold text-brand-gold">1</div>
+                                </div>
+                                <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800">
+                                    <div class="text-[10px] text-zinc-500 uppercase">Economia Gerada</div>
+                                    <div class="text-base font-bold text-emerald-400">R$ 190</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="relative z-10">
+
+                        <!-- Next Reward Highlight -->
+                        <div class="bg-gradient-to-br from-zinc-900 via-brand-leather to-zinc-950 border border-brand-gold/40 rounded-2xl p-5 shadow-xl relative overflow-hidden">
                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-xs uppercase font-bold text-brand-gold tracking-widest flex items-center gap-1.5">
-                                    <i class="fa-solid fa-bullseye"></i> Próxima Recompensa
+                                <span class="text-xs font-bold text-brand-gold uppercase tracking-widest">
+                                    <i class="fa-solid fa-trophy mr-1"></i> Meta do Cliente
                                 </span>
                                 <span id="stampsRemainingBadge" class="text-xs bg-brand-gold/20 text-brand-gold border border-brand-gold/30 px-2.5 py-0.5 rounded-full font-semibold">
                                     Faltam 10 selos
                                 </span>
                             </div>
-                            <h4 id="nextRewardTitle" class="font-serif-title text-lg font-bold text-white mb-1">Picanha Inteira Premium Mocellin</h4>
+                            <h4 class="font-serif-title text-lg font-bold text-white mb-1">Picanha Inteira Prepared Mocellin</h4>
                             <p class="text-xs text-zinc-300 mb-4 leading-relaxed">
-                                Complete sua cartela com 10 selos de picanha e ganhe uma peça inteira preparada na brasa no salão ou para viagem!
+                                Complete os 10 selos no seu cartão virtual e ganhe uma peça inteira preparada na pedra vulcânica!
                             </p>
-                            <button onclick="switchTab('rewards')" class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold rounded-xl transition-all border border-zinc-700 flex items-center justify-center gap-2">
-                                Ver Todo o Catálogo de Recompensas <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="switchClientSubTab('rewards')" class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold rounded-xl transition-all border border-zinc-700 flex items-center justify-center gap-2">
+                                Ver Catálogo Completo de Prêmios <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
-                    </div>
 
-                    <!-- Thursday Special Banner -->
-                    <div class="bg-gradient-to-r from-brand-emberDark/40 to-zinc-900 border border-brand-ember/40 rounded-2xl p-4 flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-brand-ember/20 border border-brand-ember/50 flex items-center justify-center shrink-0 text-brand-ember text-2xl">
-                            <i class="fa-solid fa-bolt animate-pulse"></i>
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-white text-sm">Toda Quinta-Feira: Selos em Dobro!</h5>
-                            <p class="text-xs text-zinc-400 mt-0.5">Peça qualquer prato com picanha nas quintas e acumule 2x mais rápido na sua cartela.</p>
-                        </div>
                     </div>
 
                 </div>
-
             </div>
-        </section>
 
-        <!-- TAB 2: CALCULADORA DO CHURRASQUEIRO DE PICANHA -->
-        <section id="content-calc" class="tab-content hidden transition-all duration-300">
-            <div class="max-w-4xl mx-auto bg-zinc-900/90 border border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-2xl backdrop-blur">
-                <div class="text-center max-w-xl mx-auto mb-8">
-                    <div class="inline-flex items-center gap-2 bg-brand-gold/10 text-brand-gold px-3 py-1 rounded-full text-xs font-semibold border border-brand-gold/20 mb-3">
-                        <i class="fa-solid fa-calculator"></i> Planejador Mocellin
+            <!-- SUBTAB 2: CALCULADORA DO CHURRASQUEIRO -->
+            <div id="subcontent-calc" class="subcontent-block hidden">
+                <div class="max-w-4xl mx-auto bg-zinc-900/90 border border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-2xl">
+                    <div class="text-center max-w-xl mx-auto mb-8">
+                        <span class="bg-brand-gold/10 text-brand-gold px-3 py-1 rounded-full text-xs font-bold border border-brand-gold/20">
+                            <i class="fa-solid fa-calculator mr-1"></i> Planejador Mocellin Uberaba
+                        </span>
+                        <h3 class="font-serif-title text-2xl lg:text-3xl font-bold text-gradient-gold mt-2">Calculadora do Churrasco de Picanha</h3>
+                        <p class="text-xs text-zinc-400 mt-1">Descubra as quantidades ideais para o seu evento sem desperdício.</p>
                     </div>
-                    <h2 class="font-serif-title text-2xl lg:text-3xl font-bold text-gradient-gold">Calculadora do Churrasqueiro</h2>
-                    <p class="text-xs lg:text-sm text-zinc-400 mt-2">
-                        Calcule com precisão a quantidade de Picanha Mocellin, acompanhamentos e bebidas para o seu evento em Uberaba sem desperdícios!
-                    </p>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-                    <!-- Inputs Form -->
-                    <div class="md:col-span-6 space-y-5 bg-zinc-950/60 p-5 rounded-2xl border border-zinc-800">
-                        <div>
-                            <label class="block text-xs font-semibold text-zinc-300 mb-2 flex justify-between">
-                                <span><i class="fa-solid fa-user text-brand-gold mr-1.5"></i> Adultos (Consumo normal)</span>
-                                <span id="valAdults" class="text-brand-gold font-bold">4</span>
-                            </label>
-                            <input type="range" id="inputAdults" min="1" max="50" value="4" oninput="calculateChurrasco()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2 rounded-lg">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-zinc-300 mb-2 flex justify-between">
-                                <span><i class="fa-solid fa-child text-brand-gold mr-1.5"></i> Crianças (Até 10 anos)</span>
-                                <span id="valKids" class="text-brand-gold font-bold">2</span>
-                            </label>
-                            <input type="range" id="inputKids" min="0" max="30" value="2" oninput="calculateChurrasco()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2 rounded-lg">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-zinc-300 mb-2 flex justify-between">
-                                <span><i class="fa-solid fa-clock text-brand-gold mr-1.5"></i> Duração do Evento</span>
-                                <span id="valDuration" class="text-brand-gold font-bold">3 Horas</span>
-                            </label>
-                            <input type="range" id="inputDuration" min="1" max="8" value="3" oninput="calculateChurrasco()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2 rounded-lg">
-                        </div>
-
-                        <div class="pt-2 border-t border-zinc-800">
-                            <label class="block text-xs font-semibold text-zinc-300 mb-2">Perfil dos Convidados</label>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button type="button" onclick="setProfile('moderate')" id="prof-moderate" class="prof-btn active py-2 px-3 text-xs rounded-xl border border-brand-gold bg-brand-gold/20 text-brand-gold font-medium">Equilibrado</button>
-                                <button type="button" onclick="setProfile('heavy')" id="prof-heavy" class="prof-btn py-2 px-3 text-xs rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-400 font-medium">Amantes de Carne</button>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <div class="md:col-span-6 space-y-5 bg-zinc-950 p-5 rounded-2xl border border-zinc-800">
+                            <div>
+                                <label class="block text-xs font-semibold text-zinc-300 mb-2 flex justify-between">
+                                    <span>Adultos</span>
+                                    <span id="valAdults" class="text-brand-gold font-bold">4</span>
+                                </label>
+                                <input type="range" id="inputAdults" min="1" max="50" value="4" oninput="calculateChurrasco()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2 rounded-lg">
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Output Results Card -->
-                    <div class="md:col-span-6 flex flex-col justify-between bg-gradient-to-br from-zinc-900 via-zinc-900 to-brand-leather p-6 rounded-2xl border border-brand-gold/30 ember-glow">
-                        <div>
-                            <h3 class="text-sm font-bold text-brand-gold uppercase tracking-widest border-b border-zinc-800 pb-3 mb-4 flex items-center justify-between">
-                                <span>Estimativa de Compra</span>
-                                <i class="fa-solid fa-fire-burner text-brand-ember"></i>
-                            </h3>
-
-                            <div class="space-y-4">
-                                <!-- Main Highlight: Picanha -->
-                                <div class="bg-black/50 p-3.5 rounded-xl border border-brand-gold/40 flex items-center justify-between">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-lg bg-brand-ember/20 text-brand-ember flex items-center justify-center text-xl">
-                                            <i class="fa-solid fa-drumstick-bite"></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-xs font-bold text-white">Picanha Mocellin Prime</div>
-                                            <div class="text-[10px] text-zinc-400">Corte estrela para o churrasco</div>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <span id="resPicanha" class="text-xl font-extrabold text-gradient-gold">1.8 kg</span>
-                                        <div class="text-[10px] text-zinc-500">~ 2 peças</div>
-                                    </div>
-                                </div>
-
-                                <!-- Side Items List -->
-                                <div class="grid grid-cols-2 gap-3 text-xs">
-                                    <div class="bg-zinc-950/50 p-2.5 rounded-xl border border-zinc-800">
-                                        <span class="text-zinc-400 block text-[10px]">Pão de Alho Especial</span>
-                                        <strong id="resPaoAlho" class="text-white text-sm">8 unidades</strong>
-                                    </div>
-                                    <div class="bg-zinc-950/50 p-2.5 rounded-xl border border-zinc-800">
-                                        <span class="text-zinc-400 block text-[10px]">Linguiça Artesanal</span>
-                                        <strong id="resLinguica" class="text-white text-sm">0.8 kg</strong>
-                                    </div>
-                                    <div class="bg-zinc-950/50 p-2.5 rounded-xl border border-zinc-800">
-                                        <span class="text-zinc-400 block text-[10px]">Farofa & Vinagrete</span>
-                                        <strong id="resAcompanhamentos" class="text-white text-sm">0.6 kg</strong>
-                                    </div>
-                                    <div class="bg-zinc-950/50 p-2.5 rounded-xl border border-zinc-800">
-                                        <span class="text-zinc-400 block text-[10px]">Cerveja / Chopp</span>
-                                        <strong id="resCerveja" class="text-white text-sm">8 Litros</strong>
-                                    </div>
-                                </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-zinc-300 mb-2 flex justify-between">
+                                    <span>Crianças (até 10 anos)</span>
+                                    <span id="valKids" class="text-brand-gold font-bold">2</span>
+                                </label>
+                                <input type="range" id="inputKids" min="0" max="30" value="2" oninput="calculateChurrasco()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-zinc-300 mb-2 flex justify-between">
+                                    <span>Duração do Evento</span>
+                                    <span id="valDuration" class="text-brand-gold font-bold">3 Horas</span>
+                                </label>
+                                <input type="range" id="inputDuration" min="1" max="8" value="3" oninput="calculateChurrasco()" class="w-full accent-brand-gold cursor-pointer bg-zinc-800 h-2 rounded-lg">
                             </div>
                         </div>
 
-                        <div class="mt-6 pt-4 border-t border-zinc-800/80">
-                            <button onclick="orderCustomKit()" class="w-full py-3 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs rounded-xl shadow-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> Encomendar Kit Pronto no Mocellin
+                        <div class="md:col-span-6 bg-gradient-to-br from-zinc-900 to-brand-leather p-6 rounded-2xl border border-brand-gold/30 flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-xs font-bold text-brand-gold uppercase tracking-widest border-b border-zinc-800 pb-3 mb-4">Estimativa de Compra</h4>
+                                <div class="space-y-3 text-xs">
+                                    <div class="bg-black/50 p-3 rounded-xl border border-brand-gold/40 flex justify-between items-center">
+                                        <span class="font-bold text-white">Picanha Mocellin Prime</span>
+                                        <span id="resPicanha" class="text-lg font-extrabold text-gradient-gold">1.8 kg</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 text-zinc-300">
+                                        <div class="bg-zinc-950 p-2.5 rounded-lg border border-zinc-800">
+                                            <span class="text-zinc-500 block text-[10px]">Pão de Alho</span>
+                                            <strong id="resPaoAlho" class="text-white">8 un</strong>
+                                        </div>
+                                        <div class="bg-zinc-950 p-2.5 rounded-lg border border-zinc-800">
+                                            <span class="text-zinc-500 block text-[10px]">Linguiça Artesanal</span>
+                                            <strong id="resLinguica" class="text-white">0.8 kg</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button onclick="orderCustomKit()" class="w-full mt-4 py-3 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs rounded-xl shadow hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Encomendar Kit no Mocellin
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- TAB 3: PRÊMIOS & MENU DE RECOMPENSAS -->
-        <section id="content-rewards" class="tab-content hidden transition-all duration-300">
-            <div class="max-w-6xl mx-auto space-y-6">
-                
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-900/80 p-5 rounded-2xl border border-zinc-800">
+            <!-- SUBTAB 3: CATÁLOGO DE RECOMPENSAS -->
+            <div id="subcontent-rewards" class="subcontent-block hidden">
+                <div class="max-w-5xl mx-auto space-y-6">
+                    <div class="flex justify-between items-center bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                        <div>
+                            <h3 class="font-serif-title text-xl font-bold text-white">Catálogo de Recompensas</h3>
+                            <p class="text-xs text-zinc-400">Troque seus selos acumulados por prêmios na casa.</p>
+                        </div>
+                        <div class="bg-zinc-950 px-4 py-2 rounded-xl border border-brand-gold/30 text-right">
+                            <span class="text-[10px] text-zinc-400 uppercase block">Saldo de Selos</span>
+                            <span id="rewardsBalanceDisplay" class="text-brand-gold font-extrabold text-lg">0</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <!-- Reward 1 -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between">
+                            <div class="p-5">
+                                <span class="bg-black/80 text-brand-gold text-xs font-bold px-3 py-1 rounded-full border border-brand-gold/30 inline-block mb-3">3 Selos</span>
+                                <h4 class="font-serif-title font-bold text-base text-white">Sobremesa Petit Gâteau ou Pudim</h4>
+                                <p class="text-xs text-zinc-400 mt-1">Sobremesa artesanal da casa para fechar o almoço.</p>
+                            </div>
+                            <div class="p-5 pt-0">
+                                <button onclick="redeemReward('Sobremesa da Casa', 3)" class="w-full py-2 bg-zinc-800 hover:bg-brand-gold hover:text-black text-brand-gold font-bold text-xs rounded-xl transition-all border border-brand-gold/30">
+                                    Resgatar Prêmio
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Reward 2 -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between">
+                            <div class="p-5">
+                                <span class="bg-black/80 text-brand-gold text-xs font-bold px-3 py-1 rounded-full border border-brand-gold/30 inline-block mb-3">5 Selos</span>
+                                <h4 class="font-serif-title font-bold text-base text-white">2 Chopps Trincando ou Drink VIP</h4>
+                                <p class="text-xs text-zinc-400 mt-1">Chopp Heineken na caneca congelada ou drink autoral.</p>
+                            </div>
+                            <div class="p-5 pt-0">
+                                <button onclick="redeemReward('2 Chopps Trincando', 5)" class="w-full py-2 bg-zinc-800 hover:bg-brand-gold hover:text-black text-brand-gold font-bold text-xs rounded-xl transition-all border border-brand-gold/30">
+                                    Resgatar Prêmio
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Reward 3 (Top) -->
+                        <div class="bg-gradient-to-b from-zinc-900 to-brand-leather border border-brand-gold rounded-2xl overflow-hidden flex flex-col justify-between shadow-lg">
+                            <div class="p-5">
+                                <span class="bg-brand-gold text-black text-xs font-extrabold px-3 py-1 rounded-full inline-block mb-3">10 Selos</span>
+                                <h4 class="font-serif-title font-bold text-base text-brand-gold">Picanha Inteira Prepared Mocellin</h4>
+                                <p class="text-xs text-zinc-300 mt-1">Uma peça inteira de Picanha Prime com acompanhamentos.</p>
+                            </div>
+                            <div class="p-5 pt-0">
+                                <button onclick="redeemReward('Picanha Inteira Mocellin', 10)" class="w-full py-2.5 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs rounded-xl shadow hover:brightness-110">
+                                    Resgatar Picanha Grátis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTAB 4: NÍVEIS VIP -->
+            <div id="subcontent-vip" class="subcontent-block hidden">
+                <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="bg-zinc-900 border border-amber-800/40 p-5 rounded-2xl">
+                        <span class="text-xs font-bold text-amber-500 uppercase">Nível Inicial</span>
+                        <h4 class="font-serif-title text-lg font-bold text-white mt-1">Bronze VIP</h4>
+                        <ul class="text-xs text-zinc-400 space-y-2 mt-4">
+                            <li>• Acúmulo padrão de selos</li>
+                            <li>• Sobremesa no Aniversário</li>
+                        </ul>
+                    </div>
+                    <div class="bg-zinc-900 border border-slate-400/40 p-5 rounded-2xl">
+                        <span class="text-xs font-bold text-slate-300 uppercase">A partir de 10 Selos</span>
+                        <h4 class="font-serif-title text-lg font-bold text-white mt-1">Mestre Prata</h4>
+                        <ul class="text-xs text-zinc-400 space-y-2 mt-4">
+                            <li>• 5% Cashback no consumo</li>
+                            <li>• Prioridade na fila de espera</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-b from-zinc-900 to-brand-leather border border-brand-gold p-5 rounded-2xl">
+                        <span class="text-xs font-bold text-brand-gold uppercase">A partir de 25 Selos</span>
+                        <h4 class="font-serif-title text-lg font-bold text-brand-gold mt-1">Embaixador Ouro</h4>
+                        <ul class="text-xs text-zinc-300 space-y-2 mt-4">
+                            <li>• 10% Cashback permanente</li>
+                            <li>• Kit Faca Artesanal no fim do ano</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTAB 5: RESERVAS & CONTATO UBERABA -->
+            <div id="subcontent-info" class="subcontent-block hidden">
+                <div class="max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <h2 class="font-serif-title text-2xl font-bold text-gradient-gold">Catálogo de Recompensas</h2>
-                        <p class="text-xs text-zinc-400 mt-1">Troque seus selos acumulados por privilégios e sabores exclusivos.</p>
-                    </div>
-                    <div class="bg-zinc-950 px-4 py-2 rounded-xl border border-brand-gold/30 flex items-center gap-3">
-                        <i class="fa-solid fa-stamp text-brand-gold text-xl"></i>
-                        <div>
-                            <div class="text-[10px] text-zinc-400 uppercase">Seu Saldo Atual</div>
-                            <div class="text-sm font-bold text-white"><span id="rewardsBalanceDisplay" class="text-brand-gold font-extrabold text-base">0</span> Selos Picanha</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rewards Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <!-- Item 1 -->
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-brand-gold/40 transition-all group flex flex-col justify-between">
-                        <div>
-                            <div class="relative h-44 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600" alt="Sobremesa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                <span class="absolute top-3 right-3 bg-black/80 backdrop-blur text-brand-gold text-xs font-bold px-3 py-1 rounded-full border border-brand-gold/30">
-                                    3 Selos
-                                </span>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="font-serif-title font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Sobremesa Petit Gâteau ou Pudim</h3>
-                                <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-                                    Sobremesa artesanal da casa para encerrar sua experiência com chave de ouro.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="p-5 pt-0">
-                            <button onclick="redeemReward('Sobremesa da Casa', 3)" class="w-full py-2.5 bg-zinc-800 hover:bg-brand-gold hover:text-black text-brand-gold font-semibold text-xs rounded-xl transition-all border border-brand-gold/30 flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-gift"></i> Resgatar Recompensa
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-brand-gold/40 transition-all group flex flex-col justify-between">
-                        <div>
-                            <div class="relative h-44 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&q=80&w=600" alt="Chopp Trincando" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                <span class="absolute top-3 right-3 bg-black/80 backdrop-blur text-brand-gold text-xs font-bold px-3 py-1 rounded-full border border-brand-gold/30">
-                                    5 Selos
-                                </span>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="font-serif-title font-bold text-lg text-white group-hover:text-brand-gold transition-colors">2 Chopps Trincando ou Drink VIP</h3>
-                                <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-                                    Dois chopps Heineken na caneca congelada ou um drink autoral Mocellin.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="p-5 pt-0">
-                            <button onclick="redeemReward('2 Chopps Trincando', 5)" class="w-full py-2.5 bg-zinc-800 hover:bg-brand-gold hover:text-black text-brand-gold font-semibold text-xs rounded-xl transition-all border border-brand-gold/30 flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-gift"></i> Resgatar Recompensa
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 - TOP REWARD -->
-                    <div class="bg-gradient-to-b from-zinc-900 to-brand-leather border border-brand-gold/60 rounded-2xl overflow-hidden hover:border-brand-gold transition-all group flex flex-col justify-between shadow-lg">
-                        <div>
-                            <div class="relative h-44 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=80&w=600" alt="Picanha Inteira" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                <span class="absolute top-3 right-3 bg-brand-gold text-black text-xs font-extrabold px-3 py-1 rounded-full shadow">
-                                    10 Selos
-                                </span>
-                                <span class="absolute bottom-2 left-2 bg-brand-ember text-white text-[10px] font-bold px-2 py-0.5 rounded">
-                                    PRÊMIO MÁXIMO
-                                </span>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="font-serif-title font-bold text-lg text-brand-gold">Picanha Inteira Prepared Mocellin</h3>
-                                <p class="text-xs text-zinc-300 mt-2 leading-relaxed">
-                                    Uma peça completa de Picanha Prime servida na pedra vulcânica com acompanhamentos tradicionais.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="p-5 pt-0">
-                            <button onclick="redeemReward('Picanha Inteira Mocellin', 10)" class="w-full py-2.5 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs rounded-xl shadow-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-crown"></i> Resgatar Picanha Grátis
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Item 4 -->
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-brand-gold/40 transition-all group flex flex-col justify-between">
-                        <div>
-                            <div class="relative h-44 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1590794056226-77ef3a6c4743?auto=format&fit=crop&q=80&w=600" alt="Faca de Churrasco" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                <span class="absolute top-3 right-3 bg-black/80 backdrop-blur text-brand-gold text-xs font-bold px-3 py-1 rounded-full border border-brand-gold/30">
-                                    15 Selos
-                                </span>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="font-serif-title font-bold text-lg text-white group-hover:text-brand-gold transition-colors">Faca de Churrasco Artesanal Mocellin</h3>
-                                <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
-                                    Faca exclusiva em aço inox com cabo de madeira nobre e gravação personalizada.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="p-5 pt-0">
-                            <button onclick="redeemReward('Faca Artesanal Mocellin', 15)" class="w-full py-2.5 bg-zinc-800 hover:bg-brand-gold hover:text-black text-brand-gold font-semibold text-xs rounded-xl transition-all border border-brand-gold/30 flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-gift"></i> Resgatar Recompensa
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- TAB 4: NÍVEIS VIP & BENEFÍCIOS -->
-        <section id="content-vip" class="tab-content hidden transition-all duration-300">
-            <div class="max-w-5xl mx-auto space-y-8">
-                <div class="text-center max-w-xl mx-auto">
-                    <h2 class="font-serif-title text-2xl lg:text-3xl font-bold text-gradient-gold">Categorias de Fidelidade VIP</h2>
-                    <p class="text-xs lg:text-sm text-zinc-400 mt-2">Quanto mais você saboreia nossa picanha em Uberaba, maiores são seus privilégios exclusivos.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Bronze -->
-                    <div class="bg-zinc-900/90 border border-amber-800/40 rounded-2xl p-6 relative flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-amber-900/30 border border-amber-700/50 flex items-center justify-center text-amber-500 text-2xl mb-4">
-                                <i class="fa-solid fa-shield-halved"></i>
-                            </div>
-                            <span class="text-[10px] uppercase font-bold text-amber-500 tracking-wider">Nível Inicial</span>
-                            <h3 class="font-serif-title text-xl font-bold text-white mt-1">Membro Bronze</h3>
-                            <p class="text-xs text-zinc-400 mt-1 mb-4">Adesão ao realizar o primeiro cadastro.</p>
-                            
-                            <ul class="space-y-2.5 text-xs text-zinc-300 border-t border-zinc-800 pt-4">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-[10px]"></i> Acúmulo padrão de selos</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-[10px]"></i> Sobremesa no Aniversário</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-[10px]"></i> Participação na Quinta do Assador</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-zinc-800 text-center">
-                            <span id="badgeCurrentBronze" class="text-xs bg-amber-500/20 text-amber-400 border border-amber-500/30 px-3 py-1 rounded-full font-semibold inline-block">
-                                Seu Nível Atual
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Prata -->
-                    <div class="bg-zinc-900/90 border border-slate-400/40 rounded-2xl p-6 relative flex flex-col justify-between shadow-xl">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-slate-700/30 border border-slate-400/50 flex items-center justify-center text-slate-300 text-2xl mb-4">
-                                <i class="fa-solid fa-medal"></i>
-                            </div>
-                            <span class="text-[10px] uppercase font-bold text-slate-300 tracking-wider">A partir de 10 Selos</span>
-                            <h3 class="font-serif-title text-xl font-bold text-white mt-1">Mestre Assador (Prata)</h3>
-                            <p class="text-xs text-zinc-400 mt-1 mb-4">Para clientes assíduos e conhecedores de churrasco.</p>
-
-                            <ul class="space-y-2.5 text-xs text-zinc-300 border-t border-zinc-800 pt-4">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-slate-300 text-[10px]"></i> Todos os benefícios do Bronze</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-slate-300 text-[10px]"></i> 5% Cashback em consumo no salão</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-slate-300 text-[10px]"></i> Prioridade na fila de espera no final de semana</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-slate-300 text-[10px]"></i> Drink de Boas-Vindas cortesia</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-zinc-800 text-center">
-                            <span id="badgeCurrentPrata" class="hidden text-xs bg-slate-400/20 text-slate-300 border border-slate-400/30 px-3 py-1 rounded-full font-semibold">
-                                Alcançado!
-                            </span>
-                            <span id="lockPrata" class="text-xs text-zinc-500 flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-lock text-[10px]"></i> Bloqueado
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Ouro / Embaixador -->
-                    <div class="bg-gradient-to-b from-zinc-900 via-zinc-900 to-brand-leather border border-brand-gold rounded-2xl p-6 relative flex flex-col justify-between shadow-2xl gold-glow">
-                        <div class="absolute -top-3 right-4 bg-brand-gold text-black text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider">
-                            Mais Exclusivo
-                        </div>
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-brand-gold/20 border border-brand-gold flex items-center justify-center text-brand-gold text-2xl mb-4">
-                                <i class="fa-solid fa-crown"></i>
-                            </div>
-                            <span class="text-[10px] uppercase font-bold text-brand-gold tracking-wider">A partir de 25 Selos</span>
-                            <h3 class="font-serif-title text-xl font-bold text-brand-gold mt-1">Embaixador Ouro</h3>
-                            <p class="text-xs text-zinc-300 mt-1 mb-4">A elite dos apaixonados pelo Mocellin Steakhouse.</p>
-
-                            <ul class="space-y-2.5 text-xs text-zinc-200 border-t border-zinc-800 pt-4">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-[10px]"></i> Todos os benefícios Prata</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-[10px]"></i> 10% Cashback permanente</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-[10px]"></i> Mesa garantida com reserva VIP via Direct</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-[10px]"></i> Convite para Jantar de Degustação Anual</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-gold text-[10px]"></i> Kit Faca Customizada no final do ano</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-zinc-800 text-center">
-                            <span id="badgeCurrentOuro" class="hidden text-xs bg-brand-gold text-black px-3 py-1 rounded-full font-bold">
-                                Você é Embaixador!
-                            </span>
-                            <span id="lockOuro" class="text-xs text-zinc-500 flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-lock text-[10px]"></i> Bloqueado
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 5: INFORMAÇÕES E RESERVAS (Uberaba) -->
-        <section id="content-info" class="tab-content hidden transition-all duration-300">
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
-                
-                <!-- Left: Info & Contact -->
-                <div class="md:col-span-6 space-y-6">
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-                        <h2 class="font-serif-title text-2xl font-bold text-gradient-gold mb-4">Mocellin Steakhouse Uberaba</h2>
-                        <p class="text-xs text-zinc-300 leading-relaxed mb-6">
-                            Referência em carnes nobres e churrasco de alta gastronomia em Uberaba. Estrutura aconchegante, adega climatizada e atendimento de excelência.
+                        <h3 class="font-serif-title text-xl font-bold text-gradient-gold mb-3">Mocellin Steakhouse Uberaba</h3>
+                        <p class="text-xs text-zinc-300 leading-relaxed mb-4">
+                            O ponto de encontro da melhor picanha de Uberaba. Atendimento diferenciado e cortes selecionados na brasa.
                         </p>
-
-                        <div class="space-y-4 text-xs">
-                            <div class="flex items-start gap-3 text-zinc-300">
-                                <div class="w-8 h-8 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0 border border-brand-gold/20">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </div>
-                                <div>
-                                    <strong class="text-white block">Endereço</strong>
-                                    Av. Edilson Lamartine Mendes, Uberaba - MG
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-3 text-zinc-300">
-                                <div class="w-8 h-8 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0 border border-brand-gold/20">
-                                    <i class="fa-solid fa-clock"></i>
-                                </div>
-                                <div>
-                                    <strong class="text-white block">Horário de Funcionamento</strong>
-                                    Terça a Sábado: 11:30 às 23:30<br>
-                                    Domingo: 11:30 às 17:00
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-3 text-zinc-300">
-                                <div class="w-8 h-8 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0 border border-brand-gold/20">
-                                    <i class="fa-solid fa-phone"></i>
-                                </div>
-                                <div>
-                                    <strong class="text-white block">Telefone & WhatsApp</strong>
-                                    (34) 3333-8888 / (34) 99999-0000
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 pt-4 border-t border-zinc-800 flex gap-3">
-                            <a href="https://wa.me/5534999990000?text=Olá!%20Gostaria%20de%20fazer%20uma%20reserva%20pelo%20Clube%20Picanha%20Prime." target="_blank" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl text-center transition-all flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> Reservar pelo WhatsApp
-                            </a>
+                        <div class="space-y-2 text-xs text-zinc-400">
+                            <p><strong class="text-white"><i class="fa-solid fa-location-dot text-brand-gold mr-1"></i> Endereço:</strong> Av. Cel. Joaquim de Oliveira Prata, Uberaba - MG</p>
+                            <p><strong class="text-white"><i class="fa-solid fa-clock text-brand-gold mr-1"></i> Horário:</strong> Ter a Sáb: 11:30 às 23:30 | Dom: 11:30 às 17:00</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Right: Simulated Reservation Form -->
-                <div class="md:col-span-6">
-                    <form onsubmit="handleReservation(event)" class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
-                        <h3 class="font-serif-title text-xl font-bold text-white mb-2">Solicitar Reserva Rápida</h3>
-                        <p class="text-xs text-zinc-400 mb-4">Garantia de mesa prioritária para Membros VIP Mocellin.</p>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-zinc-400 mb-1">Nome Completo</label>
-                            <input type="text" id="resName" required placeholder="Seu nome" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-zinc-400 mb-1">Data</label>
-                                <input type="date" id="resDate" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+                    <div>
+                        <form onsubmit="handleReservation(event)" class="space-y-3 bg-zinc-950 p-4 rounded-xl border border-zinc-800">
+                            <h4 class="text-xs font-bold text-white uppercase">Reserva VIP Rápida</h4>
+                            <input type="text" id="resName" required placeholder="Seu Nome" class="w-full bg-zinc-900 border border-zinc-800 text-xs px-3 py-2 rounded-lg text-white">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="date" id="resDate" required class="bg-zinc-900 border border-zinc-800 text-xs px-3 py-2 rounded-lg text-white">
+                                <input type="number" id="resPeople" min="1" max="20" value="2" class="bg-zinc-900 border border-zinc-800 text-xs px-3 py-2 rounded-lg text-white">
                             </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-zinc-400 mb-1">Horário</label>
-                                <select id="resTime" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
-                                    <option>12:00</option>
-                                    <option>13:30</option>
-                                    <option>19:30</option>
-                                    <option>21:00</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-zinc-400 mb-1">Número de Pessoas</label>
-                            <input type="number" id="resPeople" min="1" max="20" value="2" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
-                        </div>
-
-                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs rounded-xl shadow-lg hover:brightness-110 transition-all">
-                            Enviar Solicitação de Reserva
-                        </button>
-                    </form>
+                            <button type="submit" class="w-full py-2 bg-brand-gold text-black font-bold text-xs rounded-lg">Solicitar Reserva</button>
+                        </form>
+                    </div>
                 </div>
-
             </div>
+
         </section>
 
     </main>
 
-    <!-- MODAL 1: QR Code Reward Claim -->
+    <!-- MODAL: QR Code Voucher -->
     <div id="modalReward" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-zinc-900 border border-brand-gold/50 rounded-2xl max-w-sm w-full p-6 text-center relative shadow-2xl animate-stamp">
             <button onclick="closeModal('modalReward')" class="absolute top-3 right-3 text-zinc-400 hover:text-white text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-
             <div class="w-12 h-12 bg-brand-gold/20 text-brand-gold rounded-full flex items-center justify-center mx-auto mb-3 border border-brand-gold/30 text-xl">
                 <i class="fa-solid fa-qrcode"></i>
             </div>
-
             <h3 class="font-serif-title text-xl font-bold text-white mb-1">Voucher de Resgate</h3>
             <p id="modalRewardName" class="text-xs text-brand-gold font-semibold mb-4">Picanha Inteira Mocellin</p>
 
-            <!-- QR Code Display Box -->
             <div class="bg-white p-4 rounded-xl inline-block shadow-inner mb-4">
                 <div id="qrcodeCanvas"></div>
             </div>
 
-            <div class="text-[11px] text-zinc-400 mb-4">
-                Apresente este QR Code ao garçom no Mocellin Uberaba para validar o seu prêmio.
-            </div>
+            <p class="text-[11px] text-zinc-400 mb-4">Apresente este QR Code ao garçom na Av. Cel. Joaquim de Oliveira Prata em Uberaba.</p>
 
             <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800 text-xs text-zinc-300">
                 Código: <span id="modalRewardCode" class="font-mono text-brand-gold font-bold">MOC-9921-X</span>
@@ -830,97 +794,115 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Edit Profile -->
+    <!-- MODAL: Edit Profile -->
     <div id="modalProfile" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-sm w-full p-6 relative">
             <button onclick="closeModal('modalProfile')" class="absolute top-3 right-3 text-zinc-400 hover:text-white text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <h3 class="font-serif-title text-lg font-bold text-white mb-4">Editar Perfil do Membro</h3>
-            <div class="space-y-4">
+            <h3 class="font-serif-title text-lg font-bold text-white mb-4">Editar Perfil do Cliente</h3>
+            <div class="space-y-3">
                 <div>
-                    <label class="block text-xs text-zinc-400 mb-1">Seu Nome</label>
-                    <input type="text" id="editInputName" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold">
+                    <label class="block text-xs text-zinc-400 mb-1">Nome</label>
+                    <input type="text" id="editInputName" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white">
                 </div>
                 <div>
-                    <label class="block text-xs text-zinc-400 mb-1">URL da Foto de Perfil</label>
-                    <input type="text" id="editInputAvatar" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold">
+                    <label class="block text-xs text-zinc-400 mb-1">Foto URL</label>
+                    <input type="text" id="editInputAvatar" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white">
                 </div>
-                <button onclick="saveProfile()" class="w-full py-2.5 bg-brand-gold text-black font-bold text-xs rounded-xl">
-                    Salvar Alterações
-                </button>
+                <button onclick="saveProfile()" class="w-full py-2.5 bg-brand-gold text-black font-bold text-xs rounded-xl">Salvar</button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-zinc-800/80 bg-black/80 py-6 px-4 text-center text-xs text-zinc-500 mt-12">
+    <footer class="border-t border-zinc-800/80 bg-black/90 py-6 px-4 text-center text-xs text-zinc-500 mt-12">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-fire text-brand-ember"></i>
                 <span class="font-serif-title font-bold text-zinc-300">Mocellin Steakhouse Uberaba</span>
             </div>
-            <div>
-                Clube Picanha Prime © 2026 • Todos os direitos reservados.
-            </div>
-            <div class="flex gap-4 text-zinc-400 text-sm">
-                <a href="#" class="hover:text-brand-gold"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="hover:text-brand-gold"><i class="fa-brands fa-facebook"></i></a>
-            </div>
+            <div>Clube Picanha Prime © 2026 • Av. Cel. Joaquim de Oliveira Prata, Uberaba - MG</div>
         </div>
     </footer>
 
     <script>
-        // State Management
         const state = {
             stamps: 0,
-            tier: 'Bronze', // Bronze, Prata, Ouro
+            tier: 'Bronze',
             totalPicanhasConsumed: 4,
             rewardsClaimed: 1,
             profileName: 'Gourmet Uberaba',
             profileAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250',
-            calcProfile: 'moderate'
+            isFlipped: false
         };
 
-        // Initialize App
         window.onload = function() {
             renderStampGrid();
             updateUI();
             calculateChurrasco();
-            
-            // Set default date for reservation
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            document.getElementById('resDate').value = tomorrow.toISOString().split('T')[0];
+            calculateOwnerRoi();
         };
 
-        // Navigation Tabs Switcher
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-gradient-to-r', 'from-brand-gold', 'to-brand-goldDark', 'text-black', 'shadow-md', 'font-semibold');
-                btn.classList.add('text-zinc-400', 'hover:text-brand-gold', 'hover:bg-zinc-900');
-            });
+        // Switch between Main Views (Owner vs Client)
+        function switchMainView(view) {
+            const ownerSec = document.getElementById('mainViewOwner');
+            const clientSec = document.getElementById('mainViewClient');
+            const btnOwner = document.getElementById('viewBtnOwner');
+            const btnClient = document.getElementById('viewBtnClient');
 
-            document.getElementById(`content-${tabId}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`tab-${tabId}`);
-            activeBtn.classList.remove('text-zinc-400', 'hover:text-brand-gold', 'hover:bg-zinc-900');
-            activeBtn.classList.add('bg-gradient-to-r', 'from-brand-gold', 'to-brand-goldDark', 'text-black', 'shadow-md', 'font-semibold');
-        }
-
-        // Card 3D Flip
-        let isFlipped = false;
-        function flipCard() {
-            const card = document.getElementById('fidelityCard');
-            isFlipped = !isFlipped;
-            if(isFlipped) {
-                card.classList.add('rotate-y-180');
+            if (view === 'owner') {
+                ownerSec.classList.remove('hidden');
+                clientSec.classList.add('hidden');
+                btnOwner.className = "flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black shadow-lg";
+                btnClient.className = "flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold transition-all flex items-center justify-center gap-2";
             } else {
-                card.classList.remove('rotate-y-180');
+                clientSec.classList.remove('hidden');
+                ownerSec.classList.add('hidden');
+                btnClient.className = "flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-brand-gold to-brand-goldDark text-black shadow-lg";
+                btnOwner.className = "flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold transition-all flex items-center justify-center gap-2";
             }
         }
 
-        // Render Stamp Grid (Verso do Cartão)
+        // Subtabs for Client View
+        function switchClientSubTab(tabId) {
+            document.querySelectorAll('.subcontent-block').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.subtab-btn').forEach(btn => {
+                btn.className = "subtab-btn px-4 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-brand-gold hover:bg-zinc-900";
+            });
+
+            document.getElementById(`subcontent-${tabId}`).classList.remove('hidden');
+            document.getElementById(`subtab-${tabId}`).className = "subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-gold text-black";
+        }
+
+        // Owner ROI Simulator Calculation
+        function calculateOwnerRoi() {
+            const clients = parseInt(document.getElementById('inputRoiClients').value);
+            const ticket = parseInt(document.getElementById('inputRoiTicket').value);
+            const extraVisits = parseInt(document.getElementById('inputRoiVisits').value);
+
+            document.getElementById('valRoiClients').innerText = `${clients.toLocaleString('pt-BR')} clientes`;
+            document.getElementById('valRoiTicket').innerText = `R$ ${ticket}`;
+            document.getElementById('valRoiVisits').innerText = `+${extraVisits} visitas/ano`;
+
+            // Gross Revenue = Clients * Ticket * ExtraVisits
+            const grossRevenue = clients * ticket * extraVisits;
+            // Net profit estimate = 35% margin
+            const netProfit = grossRevenue * 0.35;
+
+            document.getElementById('resRoiGrossRevenue').innerText = `R$ ${grossRevenue.toLocaleString('pt-BR')}`;
+            document.getElementById('resRoiNetProfit').innerText = `R$ ${netProfit.toLocaleString('pt-BR')}`;
+        }
+
+        // Card Flip
+        function flipCard() {
+            const card = document.getElementById('fidelityCard');
+            state.isFlipped = !state.isFlipped;
+            if(state.isFlipped) card.classList.add('rotate-y-180');
+            else card.classList.remove('rotate-y-180');
+        }
+
+        // Render Stamp Grid (Verso)
         function renderStampGrid() {
             const grid = document.getElementById('stampGrid');
             grid.innerHTML = '';
@@ -928,93 +910,59 @@
             for (let i = 1; i <= 10; i++) {
                 const isStamped = i <= state.stamps;
                 const slot = document.createElement('div');
-                slot.className = `aspect-square rounded-xl border flex flex-col items-center justify-center transition-all duration-300 relative ${
+                slot.className = `aspect-square rounded-xl border flex flex-col items-center justify-center transition-all ${
                     isStamped 
-                        ? 'bg-gradient-to-br from-brand-ember to-brand-emberDark border-brand-gold shadow-lg shadow-brand-ember/30' 
-                        : 'bg-zinc-900/80 border-zinc-800 text-zinc-600'
+                        ? 'bg-gradient-to-br from-brand-ember to-brand-emberDark border-brand-gold shadow-md shadow-brand-ember/30' 
+                        : 'bg-zinc-900 border-zinc-800 text-zinc-600'
                 }`;
 
                 if (isStamped) {
-                    slot.innerHTML = `
-                        <i class="fa-solid fa-fire text-brand-gold text-lg animate-stamp"></i>
-                        <span class="text-[8px] font-bold text-white mt-0.5">${i}º</span>
-                    `;
+                    slot.innerHTML = `<i class="fa-solid fa-fire text-brand-gold text-base animate-stamp"></i><span class="text-[8px] font-bold text-white mt-0.5">${i}º</span>`;
                 } else {
-                    slot.innerHTML = `
-                        <i class="fa-solid fa-drumstick-bite text-zinc-700 text-xs"></i>
-                        <span class="text-[8px] text-zinc-600 mt-0.5">${i}</span>
-                    `;
+                    slot.innerHTML = `<i class="fa-solid fa-drumstick-bite text-zinc-700 text-xs"></i><span class="text-[8px] text-zinc-600 mt-0.5">${i}</span>`;
                 }
                 grid.appendChild(slot);
             }
         }
 
-        // Add Stamp Logic
+        // Stamp Operations
         function addStamp(count = 1) {
-            const previousStamps = state.stamps;
+            const prev = state.stamps;
             state.stamps += count;
+            if (state.stamps > 10) state.stamps = 10;
 
-            if (state.stamps > 10) {
-                state.stamps = 10;
+            if (state.stamps === 10 && prev < 10) {
+                confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 }, colors: ['#D4AF37', '#FF4500', '#FFFFFF'] });
             }
 
-            // Audio Effect Simulation / Confetti if completed
-            if (state.stamps === 10 && previousStamps < 10) {
-                triggerConfetti();
-            }
-
-            // Automatically flip card to back to show stamp animation
-            const card = document.getElementById('fidelityCard');
-            if(!isFlipped) {
-                flipCard();
-            }
-
-            // Calculate Tier updates
-            checkTierStatus();
+            if(!state.isFlipped) flipCard();
             renderStampGrid();
             updateUI();
         }
 
-        // Reset Stamps
         function resetStamps() {
             state.stamps = 0;
             renderStampGrid();
             updateUI();
         }
 
-        // Trigger Canvas Confetti
-        function triggerConfetti() {
-            confetti({
-                particleCount: 120,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#D4AF37', '#FF4500', '#FFFFFF']
-            });
-        }
-
-        // Update All UI Displays
         function updateUI() {
-            // Count Displays
             document.getElementById('stampsCountDisplay').innerText = state.stamps;
             document.getElementById('rewardsBalanceDisplay').innerText = state.stamps;
-            document.getElementById('navStampBadge').innerText = state.stamps;
-
-            // Progress Bar Width
+            
             const pct = (state.stamps / 10) * 100;
             document.getElementById('cardProgressBar').style.width = `${pct}%`;
 
-            // Remaining stamps
             const remaining = 10 - state.stamps;
             const remainingBadge = document.getElementById('stampsRemainingBadge');
             if (remaining > 0) {
                 remainingBadge.innerText = `Faltam ${remaining} selos`;
                 remainingBadge.className = "text-xs bg-brand-gold/20 text-brand-gold border border-brand-gold/30 px-2.5 py-0.5 rounded-full font-semibold";
             } else {
-                remainingBadge.innerText = "PARABÉNS! PRÊMIO PRONTO!";
+                remainingBadge.innerText = "PRÊMIO DISPONÍVEL!";
                 remainingBadge.className = "text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-bold animate-pulse";
             }
 
-            // Member Info Displays
             document.getElementById('memberNameDisplay').querySelector('span').innerText = state.profileName;
             document.getElementById('profileName').innerText = state.profileName;
             document.getElementById('userAvatar').src = state.profileAvatar;
@@ -1022,25 +970,7 @@
             document.getElementById('statRewardsClaimed').innerText = state.rewardsClaimed;
         }
 
-        // Tier Logic
-        function checkTierStatus() {
-            if (state.stamps >= 10 && state.tier === 'Bronze') {
-                state.tier = 'Prata';
-                document.getElementById('tierBadgeFront').innerText = 'MESTRE PRATA';
-                document.getElementById('tierBadgeFront').className = 'px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase bg-gradient-to-r from-slate-300 to-slate-500 text-black shadow-sm';
-            }
-        }
-
-        // Calculator Functions
-        function setProfile(prof) {
-            state.calcProfile = prof;
-            document.querySelectorAll('.prof-btn').forEach(btn => {
-                btn.className = 'prof-btn py-2 px-3 text-xs rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-400 font-medium';
-            });
-            document.getElementById(`prof-${prof}`).className = 'prof-btn active py-2 px-3 text-xs rounded-xl border border-brand-gold bg-brand-gold/20 text-brand-gold font-medium';
-            calculateChurrasco();
-        }
-
+        // Calculator
         function calculateChurrasco() {
             const adults = parseInt(document.getElementById('inputAdults').value);
             const kids = parseInt(document.getElementById('inputKids').value);
@@ -1050,93 +980,62 @@
             document.getElementById('valKids').innerText = kids;
             document.getElementById('valDuration').innerText = `${duration} Horas`;
 
-            // Base calculations
-            const multiplier = state.calcProfile === 'heavy' ? 1.25 : 1.0;
-            const durationFactor = 1 + (duration - 1) * 0.1;
+            const totalPicanhaKg = (adults * 0.35 + kids * 0.15) * (1 + (duration - 1) * 0.1);
+            const paoAlho = Math.ceil(adults * 1.5 + kids * 1);
+            const linguicaKg = (adults * 0.15 + kids * 0.08);
 
-            const basePicanhaPerAdult = 0.35 * multiplier * durationFactor; // kg
-            const basePicanhaPerKid = 0.15 * multiplier * durationFactor;
-
-            const totalPicanhaKg = (adults * basePicanhaPerAdult) + (kids * basePicanhaPerKid);
-            const paoAlho = Math.ceil((adults * 1.5 + kids * 1) * durationFactor);
-            const linguicaKg = ((adults * 0.15) + (kids * 0.08)) * durationFactor;
-            const cervejaLitros = Math.ceil(adults * 1.5 * (duration * 0.6));
-
-            // Render Output
             document.getElementById('resPicanha').innerText = `${totalPicanhaKg.toFixed(1)} kg`;
             document.getElementById('resPaoAlho').innerText = `${paoAlho} un`;
             document.getElementById('resLinguica').innerText = `${linguicaKg.toFixed(1)} kg`;
-            document.getElementById('resAcompanhamentos').innerText = `${(totalPicanhaKg * 0.3).toFixed(1)} kg`;
-            document.getElementById('resCerveja').innerText = `${cervejaLitros} Litros`;
         }
 
         function orderCustomKit() {
             const picanha = document.getElementById('resPicanha').innerText;
-            const adults = document.getElementById('valAdults').innerText;
-            const msg = encodeURIComponent(`Olá Mocellin Uberaba! Gostaria de encomendar um Kit Churrasco para ${adults} pessoas contendo ${picanha} de Picanha Prime.`);
+            const msg = encodeURIComponent(`Olá Mocellin Uberaba! Gostaria de encomendar um Kit Churrasco contendo ${picanha} de Picanha Prime.`);
             window.open(`https://wa.me/5534999990000?text=${msg}`, '_blank');
         }
 
-        // Redeem Reward Logic
+        // Reward Redeem
         function redeemReward(rewardName, requiredStamps) {
             if (state.stamps < requiredStamps) {
-                alert(`Você precisa de ${requiredStamps} selos para resgatar esta recompensa. Seu saldo atual é ${state.stamps}.`);
+                alert(`Você precisa de ${requiredStamps} selos para resgatar esta recompensa. Seu saldo é ${state.stamps}.`);
                 return;
             }
 
-            // Deduct stamps
             state.stamps -= requiredStamps;
             state.rewardsClaimed++;
             renderStampGrid();
             updateUI();
 
-            // Show QR Code Modal
             document.getElementById('modalRewardName').innerText = rewardName;
             document.getElementById('modalRewardCode').innerText = `MOC-${Math.floor(1000 + Math.random() * 9000)}-X`;
 
-            // Generate QR Code dynamically
             const qrContainer = document.getElementById('qrcodeCanvas');
             qrContainer.innerHTML = '';
             new QRCode(qrContainer, {
-                text: `MOCELLIN-UBERABA-REWARD-${rewardName}-${Date.now()}`,
-                width: 128,
-                height: 128,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
+                text: `MOCELLIN-UBERABA-${rewardName}-${Date.now()}`,
+                width: 120,
+                height: 120
             });
 
             document.getElementById('modalReward').classList.remove('hidden');
         }
 
-        // Modal Controls
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
-
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
         function openEditProfile() {
             document.getElementById('editInputName').value = state.profileName;
             document.getElementById('editInputAvatar').value = state.profileAvatar;
             document.getElementById('modalProfile').classList.remove('hidden');
         }
-
         function saveProfile() {
-            const newName = document.getElementById('editInputName').value;
-            const newAvatar = document.getElementById('editInputAvatar').value;
-            if(newName) state.profileName = newName;
-            if(newAvatar) state.profileAvatar = newAvatar;
+            state.profileName = document.getElementById('editInputName').value || state.profileName;
+            state.profileAvatar = document.getElementById('editInputAvatar').value || state.profileAvatar;
             updateUI();
             closeModal('modalProfile');
         }
-
         function handleReservation(e) {
             e.preventDefault();
-            const name = document.getElementById('resName').value;
-            const date = document.getElementById('resDate').value;
-            const time = document.getElementById('resTime').value;
-            const people = document.getElementById('resPeople').value;
-
-            alert(`Obrigado, ${name}! Sua solicitação de reserva para ${people} pessoa(s) no dia ${date} às ${time} foi enviada com sucesso ao Mocellin Uberaba.`);
+            alert(`Reserva solicitada com sucesso para o Mocellin Uberaba (Av. Cel. Joaquim de Oliveira Prata). Entraremos em contato via WhatsApp!`);
             e.target.reset();
         }
     </script>
